@@ -73,8 +73,8 @@
                            <p class="text-muted mb-0">Administrator</p>
                         </div>
                      </div>
-                     <a class="dropdown-item" href="profile.html">My Profile</a>
-                     <a class="dropdown-item" href="inbox.html">Inbox</a>
+                     <a class="dropdown-item" href="#">My Profile</a>
+                     <a class="dropdown-item" href="#">Inbox</a>
                      <a class="dropdown-item" href="">Logout</a>
                   </div>
                </li>
@@ -116,9 +116,9 @@
                      <li class="submenu">
                         <a href="#"><i class="fas fa-building"></i> <span> Departments</span> <span class="menu-arrow"></span></a>
                         <ul>
-                           <li><a href="departments.html">Department List</a></li>
-                           <li><a href="add-department.html">Department Add</a></li>
-                           <li><a href="edit-department.html">Department Edit</a></li>
+                           <li><a href="{% url 'departements:department_list' %}">Department List</a></li>
+                           <li><a href="{% url 'departements:add_department' %}">Department Add</a></li>
+                           <li><a href="{% url 'departements:department_list' %}">Department View</a></li>
                         </ul>
                      </li>
                      <li class="submenu">
@@ -144,7 +144,7 @@
                         </ul>
                      </li>
                      <li>
-                        <a href="holiday.html"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
+                        <a href="{% url 'holidays:calendar' %}"><i class="fas fa-holly-berry"></i> <span>Holiday</span></a>
                      </li>
                      <li>
                         <a href="fees.html"><i class="fas fa-comment-dollar"></i> <span>Fees</span></a>
