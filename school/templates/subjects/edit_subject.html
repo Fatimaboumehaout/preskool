@@ -1,0 +1,60 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Edit Subject{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Edit Subject</h1>
+        <a href="{% url 'subjects:subject_list' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Subjects
+        </a>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Subject Information</h6>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Subject Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ subject.name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="code">Subject Code *</label>
+                            <input type="text" class="form-control" id="code" name="code" value="{{ subject.code }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="credits">Credits</label>
+                            <input type="number" class="form-control" id="credits" name="credits" value="{{ subject.credits }}" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ subject.description }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Subject
+                        </button>
+                        <a href="{% url 'subjects:subject_list' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

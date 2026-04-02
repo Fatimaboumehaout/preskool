@@ -1,0 +1,103 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Ajouter Groupe{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Ajouter Groupe</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'timetable:emploi_du_temps' %}">Time Table</a></li>
+                           <li><a href="{% url 'timetable:groupe_list' %}">Groupes</a></li>
+                           <li class="active">Ajouter Groupe</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Nom du groupe</label>
+                                           <input type="text" name="nom" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Code</label>
+                                           <input type="text" name="code" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Niveau</label>
+                                           <select name="niveau" class="form-control" required>
+                                               <option value="">Choisir...</option>
+                                               <option value="1">1ère année</option>
+                                               <option value="2">2ème année</option>
+                                               <option value="3">3ème année</option>
+                                               <option value="4">4ème année</option>
+                                               <option value="5">5ème année</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Filière</label>
+                                           <input type="text" name="filiere" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Effectif</label>
+                                           <input type="number" name="effectif" class="form-control">
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Année d'étude</label>
+                                           <input type="text" name="annee_etude" class="form-control">
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="m-t-20 text-center">
+                                   <button type="submit" class="btn btn-primary">
+                                       <i class="fas fa-save"></i> Enregistrer
+                                   </button>
+                                   <a href="{% url 'timetable:groupe_list' %}" class="btn btn-secondary">
+                                       <i class="fas fa-arrow-left"></i> Annuler
+                                   </a>
+                               </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+{% endblock %}

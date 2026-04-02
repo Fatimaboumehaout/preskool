@@ -1,0 +1,83 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Holidays List{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Holidays</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'holidays:holiday_list' %}">Holidays</a></li>
+                           <li class="active">Holiday List</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           {% if holidays %}
+                               <div class="table-responsive">
+                                   <table class="table table-striped table-hover">
+                                       <thead>
+                                           <tr>
+                                               <th>Name</th>
+                                               <th>Date</th>
+                                               <th>Type</th>
+                                               <th>Description</th>
+                                               <th>Actions</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           {% for holiday in holidays %}
+                                               <tr>
+                                                   <td>{{ holiday.name }}</td>
+                                                   <td>{{ holiday.date }}</td>
+                                                   <td>{{ holiday.holiday_type }}</td>
+                                                   <td>{{ holiday.description }}</td>
+                                                   <td>
+                                                       <a href="{% url 'holidays:edit_holiday' holiday.id %}" class="btn btn-sm btn-info">
+                                                           <i class="fas fa-edit"></i> Edit
+                                                       </a>
+                                                       <a href="{% url 'holidays:delete_holiday' holiday.id %}" class="btn btn-sm btn-danger">
+                                                           <i class="fas fa-trash"></i> Delete
+                                                       </a>
+                                                   </td>
+                                               </tr>
+                                           {% endfor %}
+                                       </tbody>
+                                   </table>
+                               </div>
+                           {% else %}
+                               <div class="text-center">
+                                   <i class="fas fa-holly-berry fa-3x text-gray-400 mb-3"></i>
+                                   <p class="text-gray-500">No holidays found. Add your first holiday!</p>
+                                   <a href="{% url 'holidays:add_holiday' %}" class="btn btn-primary">Add First Holiday</a>
+                               </div>
+                           {% endif %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+            </div>
+         </div>
+{% endblock %}

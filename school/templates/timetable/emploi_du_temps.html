@@ -1,0 +1,121 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Time Table{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Time Table</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'timetable:emploi_du_temps' %}">Time Table</a></li>
+                           <li class="active">Emploi du temps</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <div class="text-center mb-4">
+                               <h4>Emploi du Temps</h4>
+                               <p class="text-muted">Gestion des horaires et salles</p>
+                           </div>
+                           
+                           <div class="row">
+                               <div class="col-md-3">
+                                   <div class="card bg-primary text-white">
+                                       <div class="card-body">
+                                           <h5><i class="fas fa-door-open"></i> Salles</h5>
+                                           <h3>{{ salles_count|default:0 }}</h3>
+                                           <a href="{% url 'timetable:salle_list' %}" class="btn btn-light btn-sm">Voir</a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card bg-success text-white">
+                                       <div class="card-body">
+                                           <h5><i class="fas fa-chalkboard-teacher"></i> Enseignants</h5>
+                                           <h3>{{ enseignants_count|default:0 }}</h3>
+                                           <a href="{% url 'timetable:enseignant_list' %}" class="btn btn-light btn-sm">Voir</a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card bg-info text-white">
+                                       <div class="card-body">
+                                           <h5><i class="fas fa-users"></i> Groupes</h5>
+                                           <h3>{{ groupes_count|default:0 }}</h3>
+                                           <a href="{% url 'timetable:groupe_list' %}" class="btn btn-light btn-sm">Voir</a>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <div class="card bg-warning text-white">
+                                       <div class="card-body">
+                                           <h5><i class="fas fa-book"></i> Cours</h5>
+                                           <h3>{{ cours_count|default:0 }}</h3>
+                                           <a href="{% url 'timetable:cours_list' %}" class="btn btn-light btn-sm">Voir</a>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           
+                           <div class="row mt-4">
+                               <div class="col-md-12">
+                                   <div class="card">
+                                       <div class="card-header">
+                                           <h5>Actions Rapides</h5>
+                                       </div>
+                                       <div class="card-body">
+                                           <div class="row">
+                                               <div class="col-md-3 mb-2">
+                                                   <a href="{% url 'timetable:salle_create' %}" class="btn btn-primary btn-block">
+                                                       <i class="fas fa-plus"></i> Ajouter Salle
+                                                   </a>
+                                               </div>
+                                               <div class="col-md-3 mb-2">
+                                                   <a href="{% url 'timetable:enseignant_create' %}" class="btn btn-success btn-block">
+                                                       <i class="fas fa-plus"></i> Ajouter Enseignant
+                                                   </a>
+                                               </div>
+                                               <div class="col-md-3 mb-2">
+                                                   <a href="{% url 'timetable:groupe_create' %}" class="btn btn-info btn-block">
+                                                       <i class="fas fa-plus"></i> Ajouter Groupe
+                                                   </a>
+                                               </div>
+                                               <div class="col-md-3 mb-2">
+                                                   <a href="{% url 'timetable:cours_create' %}" class="btn btn-warning btn-block">
+                                                       <i class="fas fa-plus"></i> Ajouter Cours
+                                                   </a>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+            </div>
+         </div>
+{% endblock %}

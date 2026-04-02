@@ -1,0 +1,133 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Ajouter Cours{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Ajouter Cours</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'timetable:emploi_du_temps' %}">Time Table</a></li>
+                           <li><a href="{% url 'timetable:cours_list' %}">Cours</a></li>
+                           <li class="active">Ajouter Cours</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Module</label>
+                                           <input type="text" name="module" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Enseignant</label>
+                                           <input type="text" name="enseignant" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Groupe</label>
+                                           <input type="text" name="groupe" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Salle</label>
+                                           <input type="text" name="salle" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label>Jour</label>
+                                           <select name="jour" class="form-control" required>
+                                               <option value="">Choisir...</option>
+                                               <option value="Lundi">Lundi</option>
+                                               <option value="Mardi">Mardi</option>
+                                               <option value="Mercredi">Mercredi</option>
+                                               <option value="Jeudi">Jeudi</option>
+                                               <option value="Vendredi">Vendredi</option>
+                                               <option value="Samedi">Samedi</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label>Heure de début</label>
+                                           <input type="time" name="heure_debut" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4">
+                                       <div class="form-group">
+                                           <label>Heure de fin</label>
+                                           <input type="time" name="heure_fin" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Type de cours</label>
+                                           <select name="type_cours" class="form-control" required>
+                                               <option value="">Choisir...</option>
+                                               <option value="CM">Cours Magistral</option>
+                                               <option value="TD">Travaux Dirigés</option>
+                                               <option value="TP">Travaux Pratiques</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Semestre</label>
+                                           <select name="semestre" class="form-control" required>
+                                               <option value="">Choisir...</option>
+                                               <option value="1">Semestre 1</option>
+                                               <option value="2">Semestre 2</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="m-t-20 text-center">
+                                   <button type="submit" class="btn btn-primary">
+                                       <i class="fas fa-save"></i> Enregistrer
+                                   </button>
+                                   <a href="{% url 'timetable:cours_list' %}" class="btn btn-secondary">
+                                       <i class="fas fa-arrow-left"></i> Annuler
+                                   </a>
+                               </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+{% endblock %}

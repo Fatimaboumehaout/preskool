@@ -1,0 +1,96 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Ajouter Salle{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Ajouter Salle</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'timetable:emploi_du_temps' %}">Time Table</a></li>
+                           <li><a href="{% url 'timetable:salle_list' %}">Salles</a></li>
+                           <li class="active">Ajouter Salle</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Numéro</label>
+                                           <input type="text" name="numero" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Capacité</label>
+                                           <input type="number" name="capacite" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Type de salle</label>
+                                           <select name="type_salle" class="form-control" required>
+                                               <option value="">Choisir...</option>
+                                               <option value="cours">Cours</option>
+                                               <option value="tp">TP</option>
+                                               <option value="td">TD</option>
+                                               <option value="amphi">Amphi</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Bâtiment</label>
+                                           <input type="text" name="batiment" class="form-control">
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-12">
+                                       <div class="form-group">
+                                           <label>Équipements</label>
+                                           <textarea name="equipements" class="form-control" rows="3"></textarea>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="m-t-20 text-center">
+                                   <button type="submit" class="btn btn-primary">
+                                       <i class="fas fa-save"></i> Enregistrer
+                                   </button>
+                                   <a href="{% url 'timetable:salle_list' %}" class="btn btn-secondary">
+                                       <i class="fas fa-arrow-left"></i> Annuler
+                                   </a>
+                               </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+{% endblock %}

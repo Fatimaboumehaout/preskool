@@ -1,0 +1,77 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Subjects List{% endblock %}
+
+{% block content %} {# Changé de 'body' à 'content' si nécessaire #}
+<div class="page-wrapper">
+    <div class="content container-fluid">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Subjects</h1>
+            <a href="{% url 'subjects:add_subject' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Subject
+            </a>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">All Subjects</h6>
+            </div>
+            <div class="card-body">
+                {% if subjects %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Code</th>
+                                    <th>Credits</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for subject in subjects %}
+                                    <tr>
+                                        <td>{{ subject.name }}</td>
+                                        <td>{{ subject.code }}</td>
+                                        <td>{{ subject.credits }}</td>
+                                        <td>{{ subject.description|truncatechars:50 }}</td>
+                                        <td>
+                                            <a href="{% url 'subjects:edit_subject' subject.id %}" class="btn btn-sm btn-info">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </a>
+                                            <form action="{% url 'subjects:delete_subject' subject.id %}" method="POST" style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        <i class="fas fa-book fa-3x text-gray-400 mb-3"></i>
+                        <p class="text-gray-500">No subjects found. Add your first subject!</p>
+                        <a href="{% url 'subjects:add_subject' %}" class="btn btn-primary">Add First Subject</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

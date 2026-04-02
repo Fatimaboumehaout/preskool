@@ -1,0 +1,91 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Add Holiday{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Add Holiday</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'holidays:holiday_list' %}">Holidays</a></li>
+                           <li class="active">Add Holiday</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                           {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body">
+                           <form method="post">
+                               {% csrf_token %}
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Name</label>
+                                           <input type="text" name="name" class="form-control" required>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Date</label>
+                                           <input type="date" name="date" class="form-control" required>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-6">
+                                       <div class="form-group">
+                                           <label>Type</label>
+                                           <select name="holiday_type" class="form-control" required>
+                                               <option value="">Select Type</option>
+                                               <option value="public">Public Holiday</option>
+                                               <option value="school">School Holiday</option>
+                                               <option value="religious">Religious Holiday</option>
+                                               <option value="national">National Holiday</option>
+                                           </select>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="row">
+                                   <div class="col-md-12">
+                                       <div class="form-group">
+                                           <label>Description</label>
+                                           <textarea name="description" class="form-control" rows="3"></textarea>
+                                       </div>
+                                   </div>
+                               </div>
+                               <div class="m-t-20 text-center">
+                                   <button type="submit" class="btn btn-primary">
+                                       <i class="fas fa-save"></i> Add Holiday
+                                   </button>
+                                   <a href="{% url 'holidays:holiday_list' %}" class="btn btn-secondary">
+                                       <i class="fas fa-arrow-left"></i> Back to Holidays
+                                   </a>
+                               </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+            </div>
+         </div>
+{% endblock %}
