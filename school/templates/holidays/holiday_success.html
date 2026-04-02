@@ -1,0 +1,109 @@
+{% extends 'Home/base.html' %}
+
+{% block title %}Vacance Ajoutée avec Succès{% endblock %}
+
+{% block body %}
+   
+         <div class="page-wrapper">
+            <div class="content container-fluid">
+               <div class="page-header">
+                  <div class="row align-items-center">
+                     <div class="col">
+                        <h3 class="page-title">Vacance Ajoutée avec Succès</h3>
+                        <ul class="breadcrumb">
+                           <li><a href="{% url 'authentication:dashboard' %}">Dashboard</a></li>
+                           <li><a href="{% url 'holidays:holiday_list' %}">Vacances</a></li>
+                           <li class="active">Succès</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               
+               {% if messages %}
+                   {% for message in messages %}
+                       <div class="alert alert-success alert-dismissible fade show" role="alert">
+                           <i class="fas fa-check-circle"></i> {{ message }}
+                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                   {% endfor %}
+               {% endif %}
+
+               <div class="row">
+                  <div class="col-sm-12">
+                     <div class="card">
+                        <div class="card-body text-center">
+                           <div class="success-icon">
+                              <i class="fas fa-check-circle fa-5x text-success mb-4"></i>
+                           </div>
+                           
+                           <h4 class="text-success mb-3">Vacance ajoutée avec succès!</h4>
+                           <p class="text-muted mb-4">
+                              La vacance a été correctement enregistrée dans le système.
+                           </p>
+                           
+                           <div class="row mb-4">
+                              <div class="col-md-6 offset-md-3">
+                                 <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                       <tr>
+                                          <th><strong>Nom de la vacance:</strong></th>
+                                          <td>{{ holiday.name|default:"Nouvelle vacance" }}</td>
+                                       </tr>
+                                       <tr>
+                                          <th><strong>Date de début:</strong></th>
+                                          <td>{{ holiday.date_debut|date:"d/m/Y"|default:"-" }}</td>
+                                       </tr>
+                                       <tr>
+                                          <th><strong>Date de fin:</strong></th>
+                                          <td>{{ holiday.date_fin|date:"d/m/Y"|default:"-" }}</td>
+                                       </tr>
+                                       <tr>
+                                          <th><strong>Type:</strong></th>
+                                          <td>{{ holiday.get_type_conge_display|default:"-" }}</td>
+                                       </tr>
+                                       {% if holiday.description %}
+                                       <tr>
+                                          <th><strong>Description:</strong></th>
+                                          <td>{{ holiday.description }}</td>
+                                       </tr>
+                                       {% endif %}
+                                    </table>
+                                 </div>
+                              </div>
+                           </div>
+                           
+                           <div class="action-buttons">
+                              <a href="{% url 'holidays:add_holiday' %}" class="btn btn-primary mr-2">
+                                 <i class="fas fa-plus"></i> Ajouter une autre vacance
+                              </a>
+                              <a href="{% url 'holidays:holiday_list' %}" class="btn btn-info mr-2">
+                                 <i class="fas fa-list"></i> Voir la liste des vacances
+                              </a>
+                              <a href="{% url 'authentication:dashboard' %}" class="btn btn-secondary">
+                                 <i class="fas fa-home"></i> Retour au dashboard
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+<style>
+.success-icon {
+    margin: 20px 0;
+}
+
+.action-buttons {
+    margin-top: 30px;
+}
+
+.action-buttons .btn {
+    margin: 5px;
+    padding: 10px 20px;
+}
+</style>
+{% endblock %}

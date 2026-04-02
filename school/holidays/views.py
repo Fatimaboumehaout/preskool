@@ -12,23 +12,28 @@ def holiday_list(request):
 def add_holiday(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        date_debut = request.POST.get('date_debut')
-        date_fin = request.POST.get('date_fin')
+        date = request.POST.get('date')  # Le template envoie 'date'
         description = request.POST.get('description')
-        type_conge = request.POST.get('type_conge')
+        holiday_type = request.POST.get('holiday_type')  # Le template envoie 'holiday_type'
+        
+        # Validation simple
+        if not name or not date:
+            messages.error(request, 'Le nom et la date sont obligatoires!')
+            return render(request, 'holidays/add_holiday.html')
         
         if Holiday.objects.filter(name=name).exists():
-            messages.error(request, 'Holiday with this name already exists!')
+            messages.error(request, 'Une vacance avec ce nom existe déjà!')
+            return render(request, 'holidays/add_holiday.html')
         else:
-            Holiday.objects.create(
+            holiday = Holiday.objects.create(
                 name=name,
-                date_debut=date_debut,
-                date_fin=date_fin,
+                date_debut=date,  # Utiliser date comme date_debut
+                date_fin=date,    # Utiliser date comme date_fin pour l'instant
                 description=description,
-                type_conge=type_conge
+                type_conge=holiday_type
             )
-            messages.success(request, 'Holiday added successfully!')
-            return redirect('holidays:holiday_list')
+            messages.success(request, 'Vacance ajoutée avec succès!')
+            return render(request, 'holidays/holiday_success.html', {'holiday': holiday})
     
     return render(request, 'holidays/add_holiday.html')
 

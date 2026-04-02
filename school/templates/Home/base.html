@@ -75,7 +75,7 @@
                      </div>
                      <a class="dropdown-item" href="profile.html">My Profile</a>
                      <a class="dropdown-item" href="inbox.html">Inbox</a>
-                     <a class="dropdown-item" href="">Logout</a>
+                     <a class="dropdown-item" href="{% url 'authentication:logout' %}">Logout</a>
                   </div>
                </li>
             </ul>
@@ -169,6 +169,7 @@
                         <ul>
                            <li><a href="{% url 'authentication:login' %}">Login</a></li>
                            <li><a href="{% url 'authentication:signup' %}">Register</a></li>
+                           <li><a href="{% url 'authentication:user_list' %}">Gestion Utilisateurs</a></li>
                            <li><a href="#">Forgot Password</a></li>
                            <li><a href="#">Error Page</a></li>
                         </ul>
@@ -319,7 +320,6 @@
           });
       </script>
       
-      
+      {% block extra_js %}{% endblock %}
   </body>
   </html>
-  
