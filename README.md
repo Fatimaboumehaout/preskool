@@ -1,7 +1,7 @@
 # Python PFM  preskool- Plateforme de Gestion Scolaire
 
 Une application web complète de gestion scolaire développée avec Django, conçue pour administrer efficacement les aspects académiques et administratifs d'un établissement d'enseignement.
-
+ [![Watch the video](https://img.youtube.com/vi/q9bzuk91Bj8/0.jpg)](https://www.youtube.com/watch?v=q9bzuk91Bj8)
 ## 📋 Description
 
 Python PFM (Python Platform for Management) est un système intégré de gestion scolaire qui offre des fonctionnalités complètes pour la gestion des étudiants, du personnel, des cours, des examens, et de l'emploi du temps. Cette plateforme s'adresse aux établissements scolaires de tous niveaux cherchant une solution moderne et efficace.
